@@ -19,10 +19,10 @@ define(['dojo/_base/declare', 'jimu/BaseWidget', "esri/tasks/locator", "dojo/_ba
                   taskLocator.on("address-to-locations-complete", lang.hitch(this, this.closebuffer));
 
                   // Cargamos el servicio de capa de pequeños comercios y le damos una visibilidad falsa para que luego solo se cargen aquellos que aparecen dentro del buffer
-                  var urlComLoc = 'https://pcjlp/server/rest/services/PFM/localComerce/MapServer/0';
+                  var urlComLoc = 'https://pcjlp/server/rest/services/SmartCities/comercioLocal/MapServer/0';
 
                   comLoc = new FeatureLayer(urlComLoc, {
-                        outFields: ["nombre_loc", "nombre_bar", "tipo_comer"]
+                        outFields: ["nombre_loc", "distrito", "tipo_comer"]
                   });
 
                   this.map.graphics.clear();
@@ -151,7 +151,7 @@ define(['dojo/_base/declare', 'jimu/BaseWidget', "esri/tasks/locator", "dojo/_ba
                   array.forEach(resultados.features, lang.hitch(this, function (feature) {
 
                         // Pop-Up
-                        var json = { title: "Comercios cercanos", content: "<strong>Nombre Local </strong>: ${nombre_loc}<br><strong>Tipo comercio</strong>: ${tipo_comer}<br><strong>Distrito</strong>: ${nombre_bar}" };
+                        var json = { title: "Comercios cercanos", content: "<strong>Nombre Local </strong>: ${nombre_loc}<br><strong>Tipo comercio</strong>: ${tipo_comer}<br><strong>Distrito</strong>: ${distrito}" };
                         template = new InfoTemplate(json);
 
                         // Ajuste de simbología por tipo de comercio
